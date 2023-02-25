@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<head>
+    <link href="{{ url_for('static', path='/main.css') }}" rel="stylesheet">
+    <title>Сервис по распознаванию речи и перевода ее в текст </title>
+</head>
+<body>
+<form action="/" enctype="multipart/form-data" method="post">
+    <label for="model_type">Выберите Whisper модель которую хотите использовать:<br></label> <br>
+    <select id="model_type" name="model_type">
+        <option value="tiny">tiny</option>
+        <option value="base">base</option>
+        <option value="small">small</option>
+        <option value="medium">medium</option>
+        <option value="large">large</option>
+    </select><br>
+    <label for="language">Выберите язык на который хотите перевести:<br></label> <br>
+    <select id="language" name="language">
+        <option value="EN-GB">Английский</option>
+        <option value="RU">Русский</option>
+        <option value="DE">Немецкий</option>
+        <option value="FR">Французский</option>
+        <option value="ES">Испанский</option>
+    </select><br>
+
+    <input type="file" accept="audio/*" capture id="recorder" name="file" required ><br>
+
+    <audio id="player" controls></audio><br>
+
+    <script>
+        const recorder = document.getElementById('recorder');
+        const player = document.getElementById('player');
+
+        recorder.addEventListener('change', function (e) {
+          const file = e.target.files[0];
+          const url = URL.createObjectURL(file);
+          player.src = url;
+        });
+    </script>
+
+    <input type="submit" id="submit" value="Конвертировать и перевести">
+
+    {% if text %}
+        <body>
+          <a href="/download_file">Скачать файл в PDF</a>
+        </body>
+        <p>{{ text }}</p>
+    {% endif %}
+</form>
+</body>
+</html>
