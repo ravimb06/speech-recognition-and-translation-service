@@ -53,7 +53,7 @@ def add_audio(request: Request, file: bytes = File()):
     model_type = super_data['model_type']
     model = whisper.load_model(model_type)
     translator = deepl.Translator(DEEPL_AUTH_KEY)
-    result = model.transcribe("audio.mp3")
+    result = model.transcribe("audio.mp3", fp16=False)
     translated_text = translator.translate_text(result['text'], target_lang=super_data['language'])
     save_to_pdf(translated_text.text, 'translated_text.pdf')
     return template.TemplateResponse('index.html',  {
