@@ -5,7 +5,7 @@
   git clone https://github.com/ravimb06/speech-recognition-and-translation-service.git
   ```
   ```
-  cd api_yamdb
+  cd speech-recognition-and-translation-service/
   ```
   Cоздать и активировать виртуальное окружение:
   ```
